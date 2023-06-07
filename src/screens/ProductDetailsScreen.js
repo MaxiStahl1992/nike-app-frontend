@@ -7,14 +7,16 @@ import {
     Text, 
     ScrollView,
     Pressable} from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartSlice } from '../store/cartSlice';
 
 const ProductDetailsScreen = () => {
+    const dispatch = useDispatch();
     const product = useSelector(state => state.products.selectedProduct);
-    const { width } = useWindowDimensions();
     const addToCart = () => {
-        console.warn('Add to cart');
+        dispatch(cartSlice.actions.addCartItem({ product: product }))
     }
+    const { width } = useWindowDimensions();
 
     return (
         <View>
@@ -29,7 +31,7 @@ const ProductDetailsScreen = () => {
                         />
                     )}
                     horizontal
-                    showsHorizontalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={true}
                     pagingEnabled
                 />
 
