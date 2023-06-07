@@ -6,12 +6,11 @@ import {
     useWindowDimensions, 
     Text, 
     ScrollView,
-    Pressable} from 'react-native'
-import products from '../data/products'
-import { Ionicons } from "@expo/vector-icons";
+    Pressable} from 'react-native';
+import { useSelector } from 'react-redux';
 
 const ProductDetailsScreen = () => {
-    const product = products[0];
+    const product = useSelector(state => state.products.selectedProduct);
     const { width } = useWindowDimensions();
     const addToCart = () => {
         console.warn('Add to cart');
@@ -49,12 +48,7 @@ const ProductDetailsScreen = () => {
             {/* Add to cart button */}
             <Pressable onPress={addToCart} style={styles.button}>
                 <Text style={styles.buttonText}>Add to cart</Text>
-            </Pressable>
-
-            {/* Navigate icon */}
-            <Pressable style={styles.icon}>
-                <Ionicons name="close" size={24} color="white" />
-            </Pressable>
+            </Pressable>       
         </View>
     )
 };
